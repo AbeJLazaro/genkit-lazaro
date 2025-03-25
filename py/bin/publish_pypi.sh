@@ -52,7 +52,7 @@ fi
 
 # Build distributions for the specific project
 TOP_DIR=$(git rev-parse --show-toplevel)
-uv --directory="${TOP_DIR}/py/$PROJECT_TYPE" --project "$PACKAGE_NAME" build
+uv --directory="${TOP_DIR}/py/$PROJECT_TYPE" --project "$PROJECT_NAME" build
 
 # Validate Twine check
 TWINE_CHECK=$(twine check "${TOP_DIR}/py/dist/*")
