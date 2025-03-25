@@ -102,7 +102,7 @@ jobs:
       
       - name: List
         run: |
-          ls -la
+          ls -la py
 
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
