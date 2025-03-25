@@ -34,6 +34,10 @@ if [ ! -d "$PROJECT_NAME" ]; then
 fi
 cd "$PROJECT_NAME"
 
+# Install python packages
+uv pip install -e .[dev,test,docs]
+uv pip install twine
+
 # Validate new version information
 PACKAGE_INFO=$(uv pip show genkit-ai)
 

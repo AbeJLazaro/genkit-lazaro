@@ -68,12 +68,6 @@ jobs:
           enable-cache: true
           python-version: ${{ matrix.python-version }}
 
-      - name: Install Python dependencies
-        run: |
-          cd py
-          uv pip install -e .[dev,test,docs]
-          uv pip install --group dev
-
       - name: Build package and validate pypi
         run: |
           cd py 
@@ -90,6 +84,7 @@ jobs:
     needs: [python_build]
     runs-on: ubuntu-latest
     environment:
+      # change to publish or similar in productive CI
       name: publish-testpypi
     permissions:
       id-token: write
@@ -99,13 +94,10 @@ jobs:
         with:
           name: dist
           path: py/dist/
-      
-      - name: List
-        run: |
-          ls -la py/dist
 
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          # remove this custom repository-url in productive CI
           repository-url: https://test.pypi.org/legacy/
           packages-dir: py/dist/
