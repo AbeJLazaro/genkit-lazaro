@@ -65,8 +65,13 @@ jobs:
       - name: Install uv and setup Python version
         uses: astral-sh/setup-uv@v5
         with:
-          enable-cache: true
           python-version: ${{ matrix.python-version }}
+
+      - name: Install Python dependencies
+        run: |
+          cd py/${{ github.event.inputs.project_type }}/${{ github.event.inputs.project_name }}
+          uv pip install -e .[dev,test,docs]
+          uv pip install --group dev
 
       - name: Build package and validate pypi
         run: |
