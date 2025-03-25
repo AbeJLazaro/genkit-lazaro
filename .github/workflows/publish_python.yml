@@ -55,7 +55,12 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential curl
+          sudo apt-get install -y build-essential curl libffi-dev cmake
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
 
       - name: Install uv and setup Python version
         uses: astral-sh/setup-uv@v5
@@ -66,6 +71,7 @@ jobs:
         run: |
           cd py
           uv pip install -e .[dev,test,docs]
+          uv pip install --group dev
 
       - name: Build package and validate pypi
         run: |
