@@ -71,7 +71,7 @@ jobs:
         run: |
           cd py/${{ github.event.inputs.project_type }}/${{ github.event.inputs.project_name }} 
           uv pip install -e .[dev,test,docs]
-          uv pip install --group dev
+          uv pip install twine
 
       - name: Build package and validate pypi
         run: |
