@@ -27,7 +27,7 @@ fi
 cd "$PROJECT_TYPE/$PROJECT_NAME"
 
 # Validate new version information
-PACKAGE_INFO=$(uv pip show genkit-ai)
+PACKAGE_INFO=$(uv pip show "$PROJECT_NAME")
 
 NEW_VERSION=$(echo "$PACKAGE_INFO" | grep -i 'Version' | awk -F': ' '{print $2}')
 PACKAGE_NAME=$(echo "$PACKAGE_INFO" | grep -i 'Name' | awk -F': ' '{print $2}')
