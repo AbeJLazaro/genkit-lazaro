@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
     inputs:
       project_type:
-        description: Project publishing to Pypi
+        description: Type of project
         type: choice
         default: package
         required: true
@@ -28,7 +28,7 @@ on:
           - package
           - plugin
       project_name:
-        description: Project publishing to Pypi
+        description: Project name publishing to Pypi
         type: choice
         default: genkit-ai
         required: true
@@ -82,7 +82,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: py/dist/
 
   pypi_publish:
     name: Upload to PyPI
@@ -97,7 +97,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: py/dist/
 
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
