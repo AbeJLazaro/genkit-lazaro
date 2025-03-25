@@ -73,7 +73,7 @@ jobs:
           PROJECT_NAME=${{ github.event.inputs.project }} PROJECT_TYPE=${{ github.event.inputs.project_type }}  ./bin/publish_pypi.sh
 
       - name: Upload build packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
@@ -88,7 +88,7 @@ jobs:
       id-token: write
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
