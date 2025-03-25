@@ -102,10 +102,10 @@ jobs:
       
       - name: List
         run: |
-          ls -la py
+          ls -la py/dist
 
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
-          packages-dir: /py/dist
+          packages-dir: py/dist/
