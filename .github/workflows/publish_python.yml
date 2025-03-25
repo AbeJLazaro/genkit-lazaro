@@ -105,4 +105,5 @@ jobs:
         with:
           # remove this custom repository-url in productive CI
           repository-url: https://test.pypi.org/legacy/
+          verbose: true
           packages-dir: py/dist/
