@@ -65,6 +65,7 @@ jobs:
       - name: Install uv and setup Python version
         uses: astral-sh/setup-uv@v5
         with:
+          enable-cache: true
           python-version: ${{ matrix.python-version }}
 
       - name: Install Python dependencies
@@ -98,6 +99,10 @@ jobs:
         with:
           name: dist
           path: py/dist/
+      
+      - name: List
+        run: |
+          ls -la
 
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
