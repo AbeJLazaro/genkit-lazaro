@@ -34,6 +34,7 @@ on:
         required: true
         options:
           - genkit-ai
+          - aioia
           - chroma
           - firebase
           - google-ai
