@@ -69,7 +69,15 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          cd py/${{ github.event.inputs.project_type }}/${{ github.event.inputs.project_name }}
+          PROJECT_TYPE="${PROJECT_TYPE:-plugins}"
+          [ "$PROJECT_TYPE" == "package" ] && PROJECT_TYPE="packages"
+
+          cd "$PROJECT_TYPE"
+          if [ ! -d "$PROJECT_NAME" ]; then
+              echo "Project $PROJECT_NAME not found!"
+              exit 1
+          fi
+          cd "$PROJECT_NAME"
           uv pip install -e .[dev,test,docs]
           uv pip install --group dev
 
