@@ -78,7 +78,7 @@ jobs:
         run: |
           cd py/${{ github.event.inputs.project_type }}/${{ github.event.inputs.project_name }} 
           uv pip install -e .[dev,test,docs]
-          uv pip install twine
+          uv pip install twine toml
 
       - name: Build package and validate pypi
         run: |

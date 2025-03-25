@@ -27,7 +27,8 @@ fi
 cd "$PROJECT_TYPE/$PROJECT_NAME"
 
 # Validate new version information
-PACKAGE_INFO=$(uv pip show "$PROJECT_NAME")
+UV_PROJECT_NAME=$(grep -oP '(?<=^name = ").*' pyproject.toml | sed 's/"//g')
+PACKAGE_INFO=$(uv pip show "$UV_PROJECT_NAME")
 
 NEW_VERSION=$(echo "$PACKAGE_INFO" | grep -i 'Version' | awk -F': ' '{print $2}')
 PACKAGE_NAME=$(echo "$PACKAGE_INFO" | grep -i 'Name' | awk -F': ' '{print $2}')
@@ -51,7 +52,7 @@ fi
 
 # Build distributions for the specific project
 TOP_DIR=$(git rev-parse --show-toplevel)
-uv --directory="${TOP_DIR}/py/$PROJECT_TYPE" --project "$PROJECT_NAME" build
+uv --directory="${TOP_DIR}/py/$PROJECT_TYPE" --project "$PACKAGE_NAME" build
 
 # Validate Twine check
 TWINE_CHECK=$(twine check "${TOP_DIR}/py/dist/*")
