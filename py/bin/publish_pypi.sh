@@ -24,15 +24,7 @@ if ((EUID == 0)); then
 fi
 
 # Navigate to the correct project directory
-PROJECT_TYPE="${PROJECT_TYPE:-plugins}"
-[ "$PROJECT_TYPE" == "package" ] && PROJECT_TYPE="packages"
-
-cd "$PROJECT_TYPE"
-if [ ! -d "$PROJECT_NAME" ]; then
-    echo "Project $PROJECT_NAME not found!"
-    exit 1
-fi
-cd "$PROJECT_NAME"
+cd "$PROJECT_TYPE/$PROJECT_NAME"
 
 # Validate new version information
 PACKAGE_INFO=$(uv pip show genkit-ai)
