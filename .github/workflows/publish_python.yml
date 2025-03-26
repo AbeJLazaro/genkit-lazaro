@@ -67,7 +67,10 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          components: rustfmt, clippy, toml-cli
+          components: rustfmt, clippy
+
+      - name: Install toml-cli
+        run: cargo install toml-cli
 
       - name: Install uv and setup Python version
         uses: astral-sh/setup-uv@v5
