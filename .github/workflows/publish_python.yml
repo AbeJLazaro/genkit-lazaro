@@ -67,7 +67,7 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          components: rustfmt, clippy
+          components: rustfmt, clippy, toml-cli
 
       - name: Install uv and setup Python version
         uses: astral-sh/setup-uv@v5
@@ -115,3 +115,4 @@ jobs:
           repository-url: https://test.pypi.org/legacy/
           verbose: true
           packages-dir: py/dist/
+

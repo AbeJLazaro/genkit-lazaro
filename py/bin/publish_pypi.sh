@@ -14,7 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -27,11 +27,8 @@ fi
 cd "$PROJECT_TYPE/$PROJECT_NAME"
 
 # Validate new version information
-UV_PROJECT_NAME=$(grep -oP '(?<=^name = ").*' pyproject.toml | sed 's/"//g')
-PACKAGE_INFO=$(uv pip show "$UV_PROJECT_NAME")
-
-NEW_VERSION=$(echo "$PACKAGE_INFO" | grep -i 'Version' | awk -F': ' '{print $2}')
-PACKAGE_NAME=$(echo "$PACKAGE_INFO" | grep -i 'Name' | awk -F': ' '{print $2}')
+NEW_VERSION=$(toml get pyproject.toml project.version --raw)
+PACKAGE_NAME=$(toml get pyproject.toml project.name --raw)
 
 echo "New Version is $NEW_VERSION"
 echo "Package Name is $PACKAGE_NAME"
@@ -64,3 +61,4 @@ if echo "$TWINE_CHECK" | grep -q "FAIL"; then
 else
     echo "Twine passed"
 fi
+
